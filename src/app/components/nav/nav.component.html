@@ -1,7 +1,13 @@
 <div class="slider-nav">
     <div class="d-flex">
-        <button (click)="goToRoute('first')">1</button>
+        <!-- <button (click)="goToRoute('first')">1</button>
         <button (click)="goToRoute('second')">2</button>
-        <button (click)="goToRoute('third')">3</button>
+        <button (click)="goToRoute('third')">3</button> -->
+
+        <a [routerLink]="['/first']" routerLinkActive="router-link-active" >1</a>
+        <a [routerLink]="['/second']" routerLinkActive="router-link-active" >2</a>
+        <a [routerLink]="['/third']" routerLinkActive="router-link-active" >3</a>
+
+
     </div>
 </div>

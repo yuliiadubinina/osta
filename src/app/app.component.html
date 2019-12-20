@@ -2,6 +2,10 @@
 <app-nav></app-nav>
 
 
-<div [@myAnimation]="o.isActivated ? o.activatedRoute : ''" style="overflow: hidden;">
+<!-- <div [@myAnimation]="o.isActivated ? o.activatedRoute : ''" style="overflow: hidden;">
     <router-outlet #o="outlet"></router-outlet>
+</div> -->
+
+<div [@myAnimation]="getPage(appOutlet)" style="overflow: hidden;">
+    <router-outlet #appOutlet="outlet"></router-outlet>
 </div>

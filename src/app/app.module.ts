@@ -17,6 +17,7 @@ import { FirstPageComponent } from './components/pages/first-page/first-page.com
 import { SecondPageComponent } from './components/pages/second-page/second-page.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ThirdPageComponent } from './components/pages/third-page/third-page.component';
+import { HomeComponent } from './components/pages/home/home.component';
 
 
 
@@ -32,7 +33,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FirstPageComponent,
     SecondPageComponent,
     NavComponent,
-    ThirdPageComponent
+    ThirdPageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

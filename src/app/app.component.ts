@@ -11,47 +11,7 @@ import { trigger, transition, style, query, animate, animateChild, group } from 
   styleUrls: ['./app.component.scss'],
   animations: [
     trigger('myAnimation', [
-      transition('* => *', [
-
-        // style({ transform: 'translateY(-100vh)' }),
-        // animate('.3s'),
-        // animateChild(),
-        // query(
-        //   ':enter',
-        //   [style({ opacity: 0 }),
-        //    style({ transform: 'translateY(0)' }), 
-        //   ],
-
-        //   { optional: true }
-        // ),
-        // query(
-        //   ':leave',
-        //   [
-        //     animateChild(),
-        //     style({ opacity: 1 }),
-        //     // style({ transform: 'translateY(0)' }),
-
-        //     animate('0.3s', style({ opacity: 0 })),
-        //     // animate('1s', style({ transform: 'translateY(-100vh)' })),
-
-
-        //   ],
-        //   { optional: true }
-        // ),
-        // query(
-        //   ':enter',
-
-
-        //   [
-        //     style({ opacity: 0 }),
-        //     // style({ transform: 'translateY(100vh)' }), 
-
-        //     animate('0.3s', style({ opacity: 1 }))
-        //     // animate('1s', style({ transform: 'translateY(0)' })),
-
-        //   ],
-        //   { optional: true }
-        // ),
+      transition('first => second', [
         group([
           query(':leave', [
             style({ transform: 'translateY(0)' }),
@@ -60,16 +20,36 @@ import { trigger, transition, style, query, animate, animateChild, group } from 
             // animate('300ms ease-out', style({ left: '100%' }))
           ], { optional: true }),
           query(':enter', [
-            style({ transform: 'translateY(100vh)' }), 
+            style({ transform: 'translateY(100vh)' }),
 
             animate('.5s', style({ transform: 'translateY(0)' })),
-              // animate('300ms ease-out', style({ left: '0%' }))
+            // animate('300ms ease-out', style({ left: '0%' }))
           ], { optional: true })
+        ]),
       ]),
+      transition('second => first', [
+        group([
+          query(':leave', [
+            style({ transform: 'translateY(0)' }),
+
+            animate('.5s', style({ transform: 'translateY(100vh)' })),
+            // animate('300ms ease-out', style({ left: '100%' }))
+          ], { optional: true }),
+          query(':enter', [
+            style({ transform: 'translateY(-100vh)' }),
+
+            animate('.5s', style({ transform: 'translateY(0)' })),
+            // animate('300ms ease-out', style({ left: '0%' }))
+          ], { optional: true })
+        ]),
       ])
+
+
     ])
   ]
 })
+
+
 
 
 
@@ -87,50 +67,48 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    console.log(this.router.config);
   }
 
 
   @HostListener('window:keydown', ['$event']) onKeyDown(e) {
 
-    console.log(e);
+      const currentUrlItem = this.router.config.find(f => f.path == this.router.url.split('/')[1]);
+      const currentUrlItemIndex = this.router.config.indexOf(currentUrlItem);
 
+      if (e.keyCode == 40 && this.router.config[currentUrlItemIndex + 1]) {
+        const urlForNavigate = this.router.config[currentUrlItemIndex + 1].path;
+        this.router.navigateByUrl(urlForNavigate);
+      } 
 
-
-    if (e.keyCode == 40) {
-      console.log(this.router.url);
-      console.log('keyup');
-      switch (this.router.url) {
-        case '/':
-          this.router.navigateByUrl('first')
-          break;
-        case '/first':
-          this.router.navigateByUrl('second')
-          break;
-        case '/second':
-          this.router.navigateByUrl('third')
-          break;
-        default:
-          break;
+      if (e.keyCode == 38 &&  this.router.config[currentUrlItemIndex - 1]) {
+        const urlForNavigate = this.router.config[currentUrlItemIndex - 1].path;
+        this.router.navigateByUrl(urlForNavigate);
       }
-    }
-    if (e.keyCode == 38) {
-      console.log(this.router.url);
-      console.log('keyup');
-      switch (this.router.url) {
-        case '/first':
-          this.router.navigateByUrl('')
-          break;
-        case '/second':
-          this.router.navigateByUrl('first')
-          break;
-        case '/third':
-          this.router.navigateByUrl('second')
-          break;
-        default:
-          break;
-      }
+
+  }
+
+  @HostListener('window:mousewheel', ['$event']) onMousewheel(e) {
+
+    const currentUrlItem = this.router.config.find(f => f.path == this.router.url.split('/')[1]);
+    const currentUrlItemIndex = this.router.config.indexOf(currentUrlItem);
+
+    if (e.deltaY == -100 && this.router.config[currentUrlItemIndex + 1]) {
+      const urlForNavigate = this.router.config[currentUrlItemIndex + 1].path;
+      this.router.navigateByUrl(urlForNavigate);
+    } 
+
+    if (e.deltaY == 100 &&  this.router.config[currentUrlItemIndex - 1]) {
+      const urlForNavigate = this.router.config[currentUrlItemIndex - 1].path;
+      this.router.navigateByUrl(urlForNavigate);
     }
   }
+
+
+  getPage(outlet) {
+    return outlet.activatedRouteData['page'] || 'one';
+  }
+
 
 
 
