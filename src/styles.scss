@@ -1,1 +1,81 @@
 /* You can add global styles to this file, and also import other style files */
+// body {
+//   padding: 0;
+//   margin: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   background: center no-repeat url('assets/images/izg.png');
+// }
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+
+.first-page, .second-page, .third-page {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  
+
+  & p {
+    transform: translateY(50vh);
+    text-align: center;
+  }
+}
+
+.first-page {
+  background-color: palevioletred;
+}
+
+.second-page {
+  background-color: goldenrod;
+}
+
+.third-page {
+  background-color: grey;
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.slider-nav {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+
+}
+
+.lang-buttons {
+  & i {
+    cursor: pointer;
+  }
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+}
+
+router-outlet ~ * {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+}

@@ -1,0 +1,22 @@
+<!-- <sm-button class="positive" (click)="invertedSidebar.show({transition: 'overlay'})">Lunch left sidebar</sm-button> -->
+<sm-sidebar class="left vertical inverted sidebar visible labeled icon menu" #invertedSidebar>        
+    <a class="item" (click)="goToRoute('')">
+        <i class="home icon"></i> {{ 'Home' | translate }}
+    </a>
+    <a class="item" (click)="goToRoute('first')">
+        <i class="block layout icon"></i> 1
+    </a>
+    <a class="item" (click)="goToRoute('second')">
+        <i class="smile icon"></i> 2
+    </a>
+    <a class="item" (click)="goToRoute('third')">
+      <i class="briefcase icon"></i> 3
+  </a>
+
+
+    <div class="lang-buttons">
+      <i (click)="setLang('ua')" class="ua flag"></i>
+      <i (click)="setLang('ru')" class="ru flag"></i>
+
+    </div>
+</sm-sidebar>
